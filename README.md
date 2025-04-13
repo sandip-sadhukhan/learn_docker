@@ -136,3 +136,11 @@ Create new image with updated tag so that we can push it to `DockerHub`.
 ```bash
 docker tag basicnodejsapp:latest sandipsadhukhan/nodejs-app:latest
 ```
+
+## Docker volumes
+Volumes are folders on your host machine hard drive which are mounted ("made available", mapped)
+into containers.
+
+-> Volume persist if a container shuts down. If a container (re-)starts and mounts
+a volume, any data inside of that volume is available in the container.
+-> A container can write data into a volume and read data from it.
