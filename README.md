@@ -109,3 +109,30 @@ Now we can create container on a specific tag of a image also.
 ```bash
 docker run -p 3000:80 -d --rm --name goalsapp goals:latest
 ```
+
+## Sharing Images & Containers
+Everyone who has an image, can create containers based on the image!
+
+### Share a Dockerfile
+Simply run `docker build .`
+
+IMPORTANT: The Dockerfile instructions might need surrounding files/folders (e.g. source code)
+
+### Share a Built Image
+Download an image, run a container based on it. No build step required, everything is included in the image already!
+
+
+### Sharing via DockerHub or Private Registry
+
+```bash
+docker push IMAGE_NAME
+docker pull IMAGE_NAME
+```
+
+`IMAGE_NAME` needs to be `HOST:NAME` to talk to private registry.
+
+Create new image with updated tag so that we can push it to `DockerHub`.
+
+```bash
+docker tag basicnodejsapp:latest sandipsadhukhan/nodejs-app:latest
+```
