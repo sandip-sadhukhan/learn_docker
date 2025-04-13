@@ -144,3 +144,20 @@ into containers.
 -> Volume persist if a container shuts down. If a container (re-)starts and mounts
 a volume, any data inside of that volume is available in the container.
 -> A container can write data into a volume and read data from it.
+
+### Types of volumes
+1. Anonymous Volume: Only exist as long as the container exist. eg: `VOLUME ["/app/feedback"]`
+2. Named Volume: It will exist even after container removed.
+
+Docker sets up a folder / path on your host machine, exact location is unknown
+to you as a dev. Managed via `docker volume` commands.
+
+### Creating named volume
+```bash
+docker run -d -p 3000:80 --rm --name feedback-app -v feedback:/app/feedback feedback-node:volumes
+```
+Here `feedback` is the name of the volume and path is container's `/app/feedback` folder
+
+## Bind Mounts (managed by us)
+We define a folder / path on our host machine.
+
