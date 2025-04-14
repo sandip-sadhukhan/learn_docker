@@ -234,3 +234,23 @@ docker build -t feedback-node:dev --build-arg DEFAULT_PORT=8000 .
 For number 2:
 instead of `mongodb://localhost:27017/swfavorites` you can use
 `mongodb://host.docker.internal:27017/swfavorites`
+
+For number 3:
+Let's say we need to connect one nodejs container into another mongodb container.
+
+First create a network
+`docker network create favorites-net`
+
+Run the mongodb container with this network
+`docker run -d --name mongodb --network favorites-net mongo`
+
+Then run the nodejs application in same network
+`docker run --network favorites-net ...`
+
+Then in nodejs application we can use the container name directly like
+instead of `mongodb://localhost:27017/swfavorites` we can use
+`mongodb://mongodb:27017/swfavorites`
+
+Because the container name is `mongodb`.
+
+
