@@ -160,4 +160,39 @@ Here `feedback` is the name of the volume and path is container's `/app/feedback
 
 ## Bind Mounts (managed by us)
 We define a folder / path on our host machine.
+We need to add access to the folder to Docker(using docker desktop resources -> file sharing option)
+So that docker can bind folder.
+
+```bash
+docker run -d -p 3000:80 --rm --name feedback-app -v /Users/sandip/coding/docker-notes/3-section/node_app1:/app feedback-node:volumes
+```
+
+```bash
+# Anonymous volume
+docker run -v /app/data ...
+
+# Named volume
+docker run -v data:/app/data ...
+
+# Bind Mount
+docker run -v /path/to/code:/app/code ...
+```
+
+For Bind mount, by default container can read & write volumes. If we only want
+docker container to read only into local file system then you can use `:ro`
+```bash
+docker run -v /path/to/code:/app/code:ro ...
+```
+
+### Create volume manually
+```bash
+docker volume create feedback-files
+
+# Then use it
+docker run -v feedback-files:/app/code
+```
+
+## `.dockerignore` file
+When we do copy for example `COPY . .`, then it will copy all files, but if we
+don't want to copy certain files/folders, then we can write that inside `.dockerignore` file
 
