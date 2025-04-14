@@ -196,3 +196,32 @@ docker run -v feedback-files:/app/code
 When we do copy for example `COPY . .`, then it will copy all files, but if we
 don't want to copy certain files/folders, then we can write that inside `.dockerignore` file
 
+## Environments variables
+We can set Environment variable in `Dockerfile` like `ENV PORT 80` then in your
+application code you can use it like for nodejs `process.env.PORT`.
+And you can override this port from docker run command as well
+`docker run -e PORT=8000 ....`
+
+Or can create a `.env` file and write
+```
+PORT=8000
+```
+Then instead of `-e` argument you can use
+`docker run --env-file ./.env ...`
+
+## Build time arguments
+When we build the image we can pass some arguments. In `Dockerfile`
+```Dockerfile
+ARG DEFAULT_PORT=80
+
+ENV PORT $DEFAULT_PORT
+
+EXPOSE $PORT
+```
+
+We can build 2 images one with default port 80 and another one with default port 8000
+```bash
+docker build -t feedback-node:web-app .
+
+docker build -t feedback-node:dev --build-arg DEFAULT_PORT=8000 .
+```
