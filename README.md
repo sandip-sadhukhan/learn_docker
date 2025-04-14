@@ -225,3 +225,12 @@ docker build -t feedback-node:web-app .
 
 docker build -t feedback-node:dev --build-arg DEFAULT_PORT=8000 .
 ```
+
+## Networking
+1. Requests from container to WWW: Works fine automatically
+2. Requests from container to host machine
+3. Request from one container to another container
+
+For number 2:
+instead of `mongodb://localhost:27017/swfavorites` you can use
+`mongodb://host.docker.internal:27017/swfavorites`
