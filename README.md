@@ -266,3 +266,44 @@ add all the details there, then simply run `docker compose up` or `docker compos
 If no change in dockerfile then when you do `docker compose up` then it will not
 rebuild images everytime, but if you want to rebuild image before running containers
 then can use `docker compose up --build` command
+
+## Utility container
+Suppose we want to create a nodejs project, then how we will run `npm init` command?
+One option is to install node in our system, but what if version mismatch etc?
+isn't the whole point of docker that we don't have to install these version mismatch
+packages etc? Utility container can save here.
+
+We can do `docker run -it node` then it will pull latest node(you can specify any
+tag for version) and run interactively.
+
+We can run any command under the container like
+`docker exec -it <container_name> npm init`
+
+### Steps
+First create a simple `Dockerfile`
+```dockerfile
+FROM node:14-alpine
+
+WORKDIR /app
+```
+
+then run
+`docker build -t node-utils .`
+
+then run the container with command
+`docker run -it -v /Users/.../app1:/app node-util npm init`
+
+### Using docker compose
+In docker compose file
+```
+services:
+  npm:
+    build: ./
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./:/app
+```
+
+Then run
+`docker-compose run --rm npm init`
