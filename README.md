@@ -254,3 +254,15 @@ instead of `mongodb://localhost:27017/swfavorites` we can use
 Because the container name is `mongodb`.
 
 
+## Docker compose
+We have long commands to run container with all volume, network, port, config details in the commands.
+
+Which is not maintainable, instead we can create `docker-compose.yaml` file and
+add all the details there, then simply run `docker compose up` or `docker compose up -d` to run it.
+
+`docker compose down` command will delete containers and networks. and if we run
+`docker compose down -v` then it will also remove the volumes.
+
+If no change in dockerfile then when you do `docker compose up` then it will not
+rebuild images everytime, but if you want to rebuild image before running containers
+then can use `docker compose up --build` command
