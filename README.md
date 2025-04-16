@@ -307,3 +307,11 @@ services:
 
 Then run
 `docker-compose run --rm npm init`
+
+
+## Development to production: Things to watch out for
+
+- Bind mounts shouldn't be used in Production!
+- Containerized apps might need a build step (e.g. React apps)
+- Multi-container projects might need to split (or should be split) across multiple hosts/remote machines
+- Trade-offs between control and responsibility might be worth it!
