@@ -315,3 +315,25 @@ Then run
 - Containerized apps might need a build step (e.g. React apps)
 - Multi-container projects might need to split (or should be split) across multiple hosts/remote machines
 - Trade-offs between control and responsibility might be worth it!
+
+## Bind Mounts, Volumes & COPY
+
+### In Development
+- Container should encapsulate the runtime environment but not necessarily the code.
+- Use "Bind Mounts" to provide your local host project files to the running container.
+- Allows for instant updates without restarting the container.
+
+### In Production
+- A container should really work standalone, you should NOT have source code on your remote machine.
+- Use `COPY` to copy a code snapshot into the image.
+- Ensures that every image runs without any extra, surrounding configuration or code.
+
+## Deploy on EC2 vs ECS
+
+### Our own Remote machine(eg: AWS EC2)
+- We need to create them, manage them, keep them updated, monitor them, scale them etc.
+- Great if you're an experienced admin/cloud expert.
+
+### Managed Remote Machines(eg: AWS ECS)
+- Creation, management, updating is handled automatically, monitoring and scaling is simplified.
+- Great if you simply want to deploy your app/containers.
