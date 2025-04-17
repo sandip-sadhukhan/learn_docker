@@ -337,3 +337,16 @@ Then run
 ### Managed Remote Machines(eg: AWS ECS)
 - Creation, management, updating is handled automatically, monitoring and scaling is simplified.
 - Great if you simply want to deploy your app/containers.
+
+## Multistage build
+```dockerfile
+FROM image1
+
+# Add code
+...
+
+# Second build
+FROM image2
+...
+
+```
